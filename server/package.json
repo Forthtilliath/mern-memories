@@ -5,7 +5,9 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "start": "nodemon index.js"
+        "start": "nodemon index.js",
+        "update_heroku": "git add . && git commit -am \"update\" && git push heroku main",
+        "open": "heroku open"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",

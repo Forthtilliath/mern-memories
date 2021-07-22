@@ -15,12 +15,13 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 
-const CONNECTION_URL = 'mongodb+srv://' + process.env.DB_USER_PASS + '@cluster0.1qjb5.mongodb.net/Memories';
+app.get('/', (req, res) => res.send('Hello to memories API'));
+
 const PORT = process.env.PORT || 5000;
 
 mongoose
-    .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+    .connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => app.listen(PORT, () => console.log(`Server running on : http://localhost:${PORT}`)))
     .catch((error) => console.log(`${error} did not connect`));
 
 mongoose.set('useFindAndModify', false);
