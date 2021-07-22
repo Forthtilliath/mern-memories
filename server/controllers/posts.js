@@ -35,3 +35,13 @@ export const deletePost = (req, res) => {
 
     PostMessage.findByIdAndRemove(id).then(() => res.json({ message: 'Post deleted successfully' }));
 };
+
+export const likePost = (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
+
+    PostMessage.findById(id)
+        .then((post) => PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true }))
+        .then((updatedPost) => res.json(updatedPost));
+};
