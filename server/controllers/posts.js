@@ -10,7 +10,7 @@ export const getPosts = (req, res) => {
 };
 
 export const createPost = (req, res) => {
-    const newPost = new PostMessage(req.body);
+    const newPost = new PostMessage({ ...req.body, createdAt: new Date() });
 
     try {
         newPost.save().then(() => res.status(201).json(newPost));
@@ -20,10 +20,18 @@ export const createPost = (req, res) => {
 };
 
 export const updatePost = (req, res) => {
-    const { id: _id } = req.params;
+    const { id } = req.params;
     const post = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
 
-    PostMessage.findByIdAndUpdate(_id, { ...post, _id }, { new: true }).then((updatedPost) => res.json(updatedPost));
+    PostMessage.findByIdAndUpdate(id, { ...post, id }, { new: true }).then((updatedPost) => res.json(updatedPost));
+};
+
+export const deletePost = (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
+
+    PostMessage.findByIdAndRemove(id).then(() => res.json({ message: 'Post deleted successfully' }));
 };

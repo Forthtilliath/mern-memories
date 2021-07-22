@@ -7,14 +7,14 @@ import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
-    const initialData = { creator: '', title: '', message: '', tags: '', selectedFile: '' };
-    // const initialData = {
-    //         creator: 'Forth',
-    //         title: 'Test',
-    //         message: 'Is it works ?',
-    //         tags: 'test',
-    //         selectedFile: '',
-    //     };
+    // const initialData = { creator: '', title: '', message: '', tags: '', selectedFile: '' };
+    const initialData = {
+            creator: 'Forth',
+            title: 'Test',
+            message: 'Is it works ?',
+            tags: 'test',
+            selectedFile: '',
+        };
     const [postData, setPostData] = useState(initialData);
     const post = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
     const dispatch = useDispatch();
