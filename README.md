@@ -1,6 +1,11 @@
 # Introduction
 
-Ce projet a pour but de développer un projet MERN (Mongoose, Express, React et Nodejs). Le projet est un réseau social et suit les 3 vidéos suivantes : [Partie 1 : Initialisation et Création post](https://www.youtube.com/watch?v=ngc9gnGgUdA), [Partie 2](https://www.youtube.com/watch?v=aibtHnbeuio) et [Partie 3](https://www.youtube.com/watch?v=46NRrn4xi5Y). 
+Ce projet a pour but de développer un projet MERN (Mongoose, Express, React et Nodejs). Le projet est un réseau social et suit les 3 vidéos suivantes :
+- [Partie 1 : Initialisation et Création post](https://www.youtube.com/watch?v=ngc9gnGgUdA)
+- [Partie 2 : Suite du CRUD, Likes et Déploiement](https://www.youtube.com/watch?v=aibtHnbeuio)
+- [Partie 3 : Connexion](https://www.youtube.com/watch?v=LKlO8vLvUao)
+- [Partie 4 : Pagination et Recherche](https://www.youtube.com/watch?v=46NRrn4xi5Y)
+- [Partie 5 : Commentaires](https://www.youtube.com/watch?v=46NRrn4xi5Y)
 
 # Intérêts du projet
 
@@ -37,3 +42,7 @@ Un fichier api a été mis en place pour recenser l'ensemble des connexions au b
 ## Mieux gérer les connexions à MongoDB
 
 Oui, car je n'aime pas d'avoir dû accepter toutes les IP. Je trouve que question sécurité, ce n'est pas optimale. 
+
+
+https://mern-memories-forth.herokuapp.com/posts
+https://mern-memories-forth.netlify.app/
