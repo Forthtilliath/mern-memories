@@ -6,7 +6,7 @@ import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import Icon from './icon';
-// import { signin, signup } from '../../actions/auth';
+import { signin, signup } from '../../actions/auth';
 import { AUTH } from '../../constants/actionTypes';
 import useStyles from './styles';
 import Input from './Input';
@@ -22,6 +22,8 @@ const SignUp = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const switchMode = () => {
     setForm(initialState);
@@ -53,8 +55,6 @@ const SignUp = () => {
   };
 
   const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
-
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
     <Container component="main" maxWidth="xs">
