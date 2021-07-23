@@ -33,6 +33,10 @@ Un fichier api a été mis en place pour recenser l'ensemble des connexions au b
 
 ![api](/screenshots/api.png)
 
+## Google Auth
+
+Dans un projet différent, j'avais découvert comment mettre une connexion à une application à l'aide de Google. Pour cela, j'avais utilisé Firebase. Dans ce projet, cela a été fait différemment, à l'aide d'une librairie Réact 'react-google-login'. Il a été bien plus facile de mettre la connexion via google en place de cette façon.
+
 # Corrections et améliorations apportées
 
 
