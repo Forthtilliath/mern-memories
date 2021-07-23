@@ -33,6 +33,10 @@ Un fichier api a été mis en place pour recenser l'ensemble des connexions au b
 
 ![api](/screenshots/api.png)
 
+## Gestion des images
+
+Dans tout mes projets précédents sur lesquels l'utilisateur pouvait enregistrer une image, l'image était upload et stockée sur le serveur. Par exemple, si on supprimait ou modifiat le post, il fallait toujours penser à supprimer l'ancienne image. Dans le projet actuel, l'image n'est pas directement enregistrée, mais on enregistre son code directement dans mongodb. Cela a pour avantage de simplifier la gestion annexte de celles ci.
+
 ## Google Auth
 
 Dans un projet différent, j'avais découvert comment mettre une connexion à une application à l'aide de Google. Pour cela, j'avais utilisé Firebase. Dans ce projet, cela a été fait différemment, à l'aide d'une librairie Réact 'react-google-login'. Il a été bien plus facile de mettre la connexion via google en place de cette façon.
