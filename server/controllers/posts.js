@@ -10,7 +10,7 @@ export const getPosts = (req, res) => {
 };
 
 export const createPost = (req, res) => {
-    const newPost = new PostMessage({ ...req.body, createdAt: new Date() });
+    const newPost = new PostMessage({ ...req.body, creator: req.userId, createdAt: new Date().toISOString() });
 
     try {
         newPost.save().then(() => res.status(201).json(newPost));
@@ -52,7 +52,7 @@ export const likePost = (req, res) => {
             post.likes = post.likes.filter((id) => id !== String(req.userId));
         }
 
-        PostMessage.findByIdAndUpdate(id, { likeCount: post }, { new: true }).then((updatedPost) =>
+        PostMessage.findByIdAndUpdate(id, post, { new: true }).then((updatedPost) =>
             res.json(updatedPost),
         );
     });
