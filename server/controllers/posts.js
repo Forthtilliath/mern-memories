@@ -1,9 +1,25 @@
 import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 
-export const getPosts = (_req, res) => {
+export const getPosts = (req, res) => {
+    const { page } = req.query;
+
     try {
-        PostMessage.find().then((posts) => res.status(200).json(posts));
+        const LIMIT = 4;
+        const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
+
+        PostMessage.countDocuments({}).then((total) => {
+            PostMessage.find()
+                .sort({ _id: -1 })
+                .limit(LIMIT)
+                .skip(startIndex)
+                .then((posts) =>
+                    res
+                        .status(200)
+                        .json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) }),
+                );
+            // .then((posts) => res.status(200).json(posts));
+        });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
