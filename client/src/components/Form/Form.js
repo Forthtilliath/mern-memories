@@ -90,6 +90,12 @@ const Form = ({ currentId, setCurrentId }) => {
                     size="large"
                     type="submit"
                     fullWidth
+                    disabled={
+                        postData.title === '' ||
+                        postData.message === '' ||
+                        postData.tags === [] ||
+                        postData.selectedFile === ''
+                    }
                 >
                     Submit
                 </Button>
