@@ -22,6 +22,7 @@ const reducer = (state = { isLoading: true, posts: [] }, action) => {
             return { ...state, posts: [...state.posts, action.payload] };
         case actions.UPDATE:
         case actions.LIKE:
+        case actions.COMMENT:
             return {
                 ...state,
                 posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)),

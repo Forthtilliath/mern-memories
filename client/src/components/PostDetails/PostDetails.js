@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
 
+import CommentSection from './CommentSection';
 import useStyles from './styles';
 import { getPost, getPostsBySearch } from '../../actions/posts';
 
@@ -57,9 +58,7 @@ const PostDetails = () => {
                         <strong>Realtime Chat - coming soon!</strong>
                     </Typography>
                     <Divider style={{ margin: '20px 0' }} />
-                    <Typography variant="body1">
-                        <strong>Comments - coming soon!</strong>
-                    </Typography>
+                    <CommentSection post={post} />
                     <Divider style={{ margin: '20px 0' }} />
                 </div>
                 <div className={classes.imageSection}>
@@ -81,7 +80,7 @@ const PostDetails = () => {
                     <Divider />
                     <div className={classes.recommendedPosts}>
                         {recommandedPosts.map(({ title, message, name, likes, selectedFile, _id }) => (
-                            <div key={_id} style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)}>
+                            <div key={_id} className={classes.recommendedPost} onClick={() => openPost(_id)}>
                                 <Typography gutterBottom variant="h6">{title}</Typography>
                                 <Typography gutterBottom variant="subtitle2">{name}</Typography>
                                 <Typography gutterBottom variant="subtitle2">{message}</Typography>

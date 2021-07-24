@@ -94,3 +94,18 @@ export const likePost = (req, res) => {
         PostMessage.findByIdAndUpdate(id, post, { new: true }).then((updatedPost) => res.json(updatedPost));
     });
 };
+
+export const commentPost = (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    if (!req.userId) return res.status(401).json({ message: 'Unauthenticated' });
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
+
+    PostMessage.findById(id).then((post) => {
+        post.comments.push(value);
+
+        PostMessage.findByIdAndUpdate(id, post, { new: true }).then((updatedPost) => res.json(updatedPost));
+    });
+};

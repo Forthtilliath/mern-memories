@@ -10,13 +10,13 @@ export default makeStyles((theme) => ({
     card: {
         'display': 'flex',
         'width': '100%',
-        '&>*': {
+        '& > *': {
             width: '50%',
         },
         [theme.breakpoints.down('sm')]: {
             'flexWrap': 'wrap',
             'flexDirection': 'column',
-            '&>*': {
+            '& > *': {
                 width: '100%',
             },
         },
@@ -38,6 +38,15 @@ export default makeStyles((theme) => ({
             flexDirection: 'column',
         },
     },
+    recommendedPost: {
+        margin: '20px',
+        cursor: 'pointer',
+        maxWidth:'20%',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+            maxWidth:'50%',
+        },
+    },
     loadingPaper: {
         display: 'flex',
         justifyContent: 'center',
@@ -45,5 +54,14 @@ export default makeStyles((theme) => ({
         padding: '20px',
         borderRadius: '15px',
         height: '39vh',
+    },
+    commentsOuterContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    commentsInnerContainer: {
+        height: '200px',
+        overflowY: 'auto',
+        marginRight: '30px',
     },
 }));
