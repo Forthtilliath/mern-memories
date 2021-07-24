@@ -75,7 +75,7 @@ const PostDetails = () => {
             {!!recommandedPosts.length && (
                 <div className={classes.section}>
                     <Typography gutterBottom variant="h5">
-                        You might alse like:
+                        You might also like:
                     </Typography>
                     <Divider />
                     <div className={classes.recommendedPosts}>

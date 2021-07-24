@@ -24,6 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build2": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
