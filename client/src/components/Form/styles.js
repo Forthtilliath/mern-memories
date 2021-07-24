@@ -17,6 +17,13 @@ export default makeStyles((theme) => ({
   fileInput: {
     width: '97%',
     margin: '10px 0',
+    color: '#0000 !important',
+    '&::before': {
+      content: '"Attach your photo: "',
+      color: 'grey',
+      height: 60,
+      marginTop: -60
+    }
   },
   buttonSubmit: {
     marginBottom: 10,
