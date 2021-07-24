@@ -5,7 +5,7 @@ export const getPosts = (req, res) => {
     const { page } = req.query;
 
     try {
-        const LIMIT = 4;
+        const LIMIT = Number(process.env.POSTS_PER_PAGE);
         const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
 
         PostMessage.countDocuments({}).then((total) => {

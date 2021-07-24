@@ -1,7 +1,12 @@
 import * as actions from '../constants/actionTypes';
 
-const reducer = (state = [], action) => {
+const reducer = (state = { isLoading: true, posts: [] }, action) => {
     switch (action.type) {
+        case actions.LOADING_START:
+            return { ...state, isLoading: true };
+        case actions.LOADING_END:
+            return { ...state, isLoading: false };
+
         case actions.FETCH_ALL:
             return {
                 ...state,
@@ -10,14 +15,14 @@ const reducer = (state = [], action) => {
                 numberOfPages: action.payload.numberOfPages,
             };
         case actions.FETCH_BY_SEARCH:
-            return action.payload;
+            return { ...state, posts: action.payload };
         case actions.CREATE:
-            return [...state, action.payload];
+            return { ...state, posts: [...state.posts, action.payload] };
         case actions.UPDATE:
         case actions.LIKE:
-            return state.map((post) => (post._id === action.payload._id ? action.payload : post));
+            return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };
         case actions.DELETE:
-            return state.filter((post) => post._id !== action.payload);
+            return { ...state, posts: state.posts.filter((post) => post._id !== action.payload) };
         default:
             return state;
     }
