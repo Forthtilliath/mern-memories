@@ -1,6 +1,16 @@
 import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 
+export const getPost = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        PostMessage.findById(id).then((post) => res.status(200).json(post));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
 export const getPosts = (req, res) => {
     const { page } = req.query;
 
@@ -18,7 +28,6 @@ export const getPosts = (req, res) => {
                         .status(200)
                         .json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) }),
                 );
-            // .then((posts) => res.status(200).json(posts));
         });
     } catch (error) {
         res.status(404).json({ message: error.message });

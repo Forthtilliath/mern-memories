@@ -1,14 +1,24 @@
 import * as api from '../api';
 import * as actions from '../constants/actionTypes';
 
+export const getPost = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: actions.LOADING_START });
+        const { data } = await api.fetchPost(id);
+
+        dispatch({ type: actions.FETCH_POST, payload: data });
+        dispatch({ type: actions.LOADING_END });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getPosts = (page) => async (dispatch) => {
     try {
         dispatch({ type: actions.LOADING_START });
-        const {
-            data: { data, currentPage, numberOfPages },
-        } = await api.fetchPosts(page);
+        const { data } = await api.fetchPosts(page);
 
-        dispatch({ type: actions.FETCH_ALL, payload: { data, currentPage, numberOfPages } });
+        dispatch({ type: actions.FETCH_ALL, payload: data });
         dispatch({ type: actions.LOADING_END });
     } catch (error) {
         console.log(error);
