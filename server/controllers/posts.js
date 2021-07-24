@@ -1,9 +1,23 @@
 import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 
-export const getPosts = (req, res) => {
+export const getPosts = (_req, res) => {
     try {
         PostMessage.find().then((posts) => res.status(200).json(posts));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
+export const getPostsBySearch = (req, res) => {
+    const { searchQuery, tags } = req.query;
+
+    try {
+        const title = new RegExp(searchQuery, 'i');
+
+        PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] })
+            // .then((posts) => console.log(posts.length))
+            .then((posts) => res.status(200).json(posts));
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -52,8 +66,6 @@ export const likePost = (req, res) => {
             post.likes = post.likes.filter((id) => id !== String(req.userId));
         }
 
-        PostMessage.findByIdAndUpdate(id, post, { new: true }).then((updatedPost) =>
-            res.json(updatedPost),
-        );
+        PostMessage.findByIdAndUpdate(id, post, { new: true }).then((updatedPost) => res.json(updatedPost));
     });
 };
