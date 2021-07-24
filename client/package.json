@@ -46,5 +46,8 @@
   },
   "main": "index.js",
   "author": "Forth <33458877+Forthtilliath@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-jest": "^27.0.6"
+  }
 }

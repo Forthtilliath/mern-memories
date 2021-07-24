@@ -18,13 +18,11 @@ const PostDetails = () => {
 
     useEffect(() => {
         dispatch(getPost(id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
+    }, [dispatch, id]);
 
     useEffect(() => {
-        dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [post]);
+        dispatch(getPostsBySearch({ search: '', tags: post?.tags.join(',') }));
+    }, [dispatch, post]);
 
     if (!post) return null;
 

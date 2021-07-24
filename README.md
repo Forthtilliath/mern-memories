@@ -103,6 +103,14 @@ De plus, si la recherche ne porte que sur des tags, searchQuery a pour valeur ``
 
 Comme le montre l'image, les titres contenant ``none`` se voient aussi affiché dans les résultats de la recherche ! Ce qui n'est bien entendu pas désiré.
 
+J'ai donc fait en sorte pour que si searchQuery n'avait pas de valeur, il ne soit pas passé en paramètre. Il a donc fallu géré en back pour accepter ceci. J'ai aussi modifié le critère de recherche. Auparavant, la recherche récupérait tous les résultats validant l'une des conditions. Hors je trouve cela plus logique que lorsque l'utilisateur remplis les 2 champs, que la recherche pour sur les 2 et non sur l'un ou l'autre.
+
+![condition](/screenshots/conditions_search.png)
+
+Ce qui donne comme résultat :
+
+![none_fixed](/screenshots/search_none_fixed.png)
+
 # Conclusion
 
 Ce projet a vraiment été intéressant. Pas toujours facile à suivre, car en anglais et ca allait parfois un peu vite, mais la persévérance a payé.
