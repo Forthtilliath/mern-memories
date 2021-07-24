@@ -93,8 +93,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     disabled={
                         postData.title === '' ||
                         postData.message === '' ||
-                        postData.tags === [] ||
-                        postData.selectedFile === ''
+                        postData.tags === []
                     }
                 >
                     Submit
