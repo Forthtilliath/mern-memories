@@ -38,10 +38,13 @@ export const getPostsBySearch = (req, res) => {
     const { searchQuery, tags } = req.query;
 
     try {
-        let conditions = [{ tags: { $in: tags.split(',') } }];
+        let conditions = [];
         if (searchQuery) {
             const title = new RegExp(searchQuery, 'i');
             conditions.push({ title });
+        }
+        if (tags) {
+            conditions.push({ tags: { $in: tags.split(',') } })
         }
 
         PostMessage.find({ $and: conditions })
