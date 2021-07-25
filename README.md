@@ -45,7 +45,7 @@ Ce projet utilise Material UI et makeStyles de A à Z, ce qui m'a vraiment permi
 
 ## Fichier API
 
-Un fichier api a été mis en place pour recenser l'ensemble des connexions au back. J'ai trouvé cela très pratique car en un clin d'oeil, on voit directement toutes connexions. En cas d'erreurs lors de la liaison, cela simplifie énormement le débogage.
+Un fichier api a été mis en place pour recenser l'ensemble des connexions au back. J'ai trouvé cela très pratique car en un clin d'oeil, on peut directement voir toutes les connexions. En cas d'erreurs lors de la liaison, cela simplifie énormement le débogage.
 
 ![api](/screenshots/api.png)
 
@@ -77,31 +77,13 @@ En front, une condition pour désactiver le bouton Submit a été mis en place s
 
 // TODO Faire en back
 
-# Améliorations possibles
-
-## Mieux gérer les connexions à MongoDB
-
-Oui, car je n'aime pas d'avoir dû accepter toutes les IP. Je trouve que question sécurité, ce n'est pas optimale. 
-
-## Mieux gérer les images
-
-Gérer les images de la façon actuelle a aussi des inconvénients. A aucun moment l'image n'est compressée ce qui a pour effet que si l'image fait plusieurs Mo, elle sera enregistrée tel quelle. L'espace disque demandée peut vite devenir incroyable si de nombreuses memories sont postées !
-
-Il n'existe aucune vérification au niveau du format du fichier uploadé. Il serait donc appréciable de mettre cela en place.
-
-De plus, aucune vérification au niveau de la taille de l'image, ainsi qu'aucune compression.
-
-https://dev.to/wchr/compress-images-in-react-react-image-file-resize-4oni
-
 ## Réactualisation après une recherche
 
-La recherche fonctionne correctement, toutefois si on réatualise la page, la recherche bloque et ne retourne aucun résultat.
-
-De plus, si la recherche ne porte que sur des tags, searchQuery a pour valeur ``none``. Cela provoque un effet secondaire :
+Loesque la recherche ne porte que sur des tags, searchQuery avait pour valeur ``none``. Cela provoquait un effet secondaire :
 
 ![none](/screenshots/search_none.png)
 
-Comme le montre l'image, les titres contenant ``none`` se voient aussi affiché dans les résultats de la recherche ! Ce qui n'est bien entendu pas désiré.
+Comme le montre l'image, les titres contenant ``none`` se voyaient aussi affiché dans les résultats de la recherche ! Ce qui n'est bien entendu pas désiré.
 
 J'ai donc fait en sorte pour que si searchQuery n'avait pas de valeur, il ne soit pas passé en paramètre. Il a donc fallu géré en back pour accepter ceci. J'ai aussi modifié le critère de recherche. Auparavant, la recherche récupérait tous les résultats validant l'une des conditions. Hors je trouve cela plus logique que lorsque l'utilisateur remplis les 2 champs, que la recherche pour sur les 2 et non sur l'un ou l'autre.
 
@@ -111,12 +93,34 @@ Ce qui donne comme résultat :
 
 ![none_fixed](/screenshots/search_none_fixed.png)
 
+## Meilleure gestion des images
+
+Gérer les images de la façon actuelle avait aussi des inconvénients. A aucun moment l'image n'était compressée ce qui avait pour effet que si l'image faisait plusieurs Mo, elle était enregistrée tel quelle. L'espace disque demandée pouvait rapidement devenir incroyable si de nombreuses memories étaient postées !
+
+J'ai donc fait en sorte que lorsqu'une image est upload, celle-ci soit redimensionnée jusqu'à 1000px de hauteur et de largeur. Ceci a eu pour effet de réduire un peu leur taille.
+
+Afin de la réduire encore plus, j'ai ajouté une compression des images à 60%. La qualité des images n'en ait pas visiblement affecté, cependant, la taille des données en est grandement réduite !
+
+De plus, il n'existait aucune vérification sur le format du fichier uploadé. J'aidonc ajouté une vérification afin de notifier l'utilisateur si le fichier était valide ou pas.
+
+# Améliorations possibles
+
+## Mieux gérer les connexions à MongoDB
+
+Oui, car je n'aime pas d'avoir dû accepter toutes les IP. Je trouve que question sécurité, ce n'est pas optimale. 
+
+## Réactualisation après une recherche
+
+La recherche fonctionne correctement, toutefois si on réatualise la page, la recherche bloque et ne retourne aucun résultat.
+
+J'ai essayé de mettre cela en place, malheureusement sans succès. Ceci serait donc une amélioration agréable à adapter.
+
 # Conclusion
 
-Ce projet a vraiment été intéressant. Pas toujours facile à suivre, car en anglais et ca allait parfois un peu vite, mais la persévérance a payé.
+Ce projet a vraiment été intéressant. Pas toujours facile à suivre, car en anglais et ça allait parfois un peu vite, mais la persévérance a payé.
 
-Malgré le fait que j'avais déjà fait un projet MERN sur un réseau social, je dois avoir que j'ai découvert une approche différente de faire les choses.
+Malgré le fait que j'avais déjà fait un projet MERN sur un réseau social, je dois avoué que j'ai découvert une approche différente de faire les choses.
 
-J'ai aussi appris comment mettre en ligne un site MERN. Ceci pourra me servir lors des projets intéressant à montrer dans un portfollio.
+J'ai aussi appris comment mettre en ligne un site MERN. Ceci pourra me reservir lorsque je souhaiterai présenter un portfollio des projets les plus intéressants.
 
 Voici la version en ligne du projet : https://mern-memories-forth.netlify.app/

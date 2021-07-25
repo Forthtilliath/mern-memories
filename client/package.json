@@ -15,6 +15,7 @@
     "react-dom": "^17.0.2",
     "react-file-base64": "^1.0.3",
     "react-google-login": "^5.2.2",
+    "react-image-file-resizer": "^0.4.7",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -46,8 +47,5 @@
   },
   "main": "index.js",
   "author": "Forth <33458877+Forthtilliath@users.noreply.github.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "babel-jest": "^27.0.6"
-  }
+  "license": "MIT"
 }

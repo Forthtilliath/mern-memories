@@ -3,6 +3,7 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
+import Resizer from 'react-image-file-resizer';
 
 import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
@@ -15,6 +16,8 @@ const Form = ({ currentId, setCurrentId }) => {
     const history = useHistory();
     const classes = useStyles();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const [successFile, setSuccessFile] = useState(false);
+    const [errorFile, setErrorFile] = useState(false);
 
     useEffect(() => {
         if (post) setPostData(post);
@@ -24,6 +27,32 @@ const Form = ({ currentId, setCurrentId }) => {
         setCurrentId(0);
         setPostData(initialData);
     };
+
+    function rizeFile(fileInput) {
+        fetch(fileInput)
+            .then((res) => res.blob())
+            .then((file) => {
+                console.log(file);
+                Resizer.imageFileResizer(
+                    file,
+                    1000,
+                    1000,
+                    'JPEG',
+                    60,
+                    0,
+                    (uri) => setPostData({ ...postData, selectedFile: uri }),
+                    'base64',
+                    600,
+                    600,
+                );
+            })
+            .then(() => setSuccessFile(true))
+            .then(() => setErrorFile(false))
+            .catch((err) => {
+                setSuccessFile(false);
+                setErrorFile(true);
+            });
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -80,9 +109,16 @@ const Form = ({ currentId, setCurrentId }) => {
                     <FileBase
                         type="file"
                         multiple={false}
-                        onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
+                        onDone={({ base64 }) => rizeFile(base64)}
+                        // onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
                     />
                 </div>
+                {(successFile || errorFile) && (
+                    <div className={classes.messageFile}>
+                        {successFile && <div className={classes.successFile}>Success: File is an Image</div>}
+                        {errorFile && <div className={classes.errorFile}>Error: File Is NOT Image!</div>}
+                    </div>
+                )}
                 <Button
                     className={classes.buttonSubmit}
                     variant="contained"
@@ -90,11 +126,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     size="large"
                     type="submit"
                     fullWidth
-                    disabled={
-                        postData.title === '' ||
-                        postData.message === '' ||
-                        postData.tags === []
-                    }
+                    disabled={postData.title === '' || postData.message === '' || postData.tags === []}
                 >
                     Submit
                 </Button>
